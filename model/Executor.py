@@ -3,7 +3,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as functional
 import torch.optim as optim
-from tqdm.notebook import tqdm
+# from tqdm.notebook import tqdm
+from progiter import ProgIter
 import numpy as np
 
 
@@ -51,7 +52,7 @@ class Executor:
         calc_min_loss = float("inf")
         all_accuracy_vals = []
         # Track loading using tqdm
-        for _ in tqdm(range(0, num_iters), total=num_iters, desc="train model"):
+        for _ in ProgIter(range(0, num_iters), verbose=2):
             self.network.train()
             for item in data_src:
                 # 0:images 1:labels
@@ -68,9 +69,8 @@ class Executor:
             calc_accuracy = self.calculate_model_accuracy(data_src)
             all_accuracy_vals.append(calc_accuracy)
             print("current iter acc:", calc_accuracy)
-            print("current iter loss:", calc_min_loss)
             calc_min_loss = min(avg_loss, calc_min_loss)
-
+            print("current iter loss:", calc_min_loss)
         return all_loss_vals, each_iter_loss, all_accuracy_vals
 
 # if __name__ == '__main__':
