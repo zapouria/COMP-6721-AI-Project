@@ -10,17 +10,18 @@ def load_data(path):
     return ImageFolder(root = path,transform = torchvision.transforms.Compose([reshape_size, data_type, normalized_metrics]))
 
 def split_data(dataset):
+    # The training data is 60% of the full data set. The validation and testing data each comprise 20% of the original data.
     train_d, test_d = sklearn.model_selection.train_test_split(dataset, test_size=0.2, random_state=30)
     train_d, validation_d = sklearn.model_selection.train_test_split(train_d, test_size=0.25, random_state=30)
     return train_d, validation_d, test_d
 
 def train_dataloarder(dataset):
-    return DataLoader(dataset=dataset, num_workers=0, shuffle=True, batch_size=10)
+    return DataLoader(dataset=dataset, num_workers=2, shuffle=True, batch_size=10)
 
 def validation_dataloarder(dataset):
-    return DataLoader(dataset=dataset, num_workers=0, shuffle=True, batch_size=10)
+    return DataLoader(dataset=dataset, num_workers=2, shuffle=True, batch_size=10)
 
 def test_dataloarder(dataset):
-    return DataLoader(dataset=dataset, num_workers=0, shuffle=True, batch_size=10)
+    return DataLoader(dataset=dataset, num_workers=2, shuffle=True, batch_size=10)
 
 
