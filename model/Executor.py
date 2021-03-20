@@ -3,7 +3,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as functional
 import torch.optim as optim
-# from tqdm.notebook import tqdm
 from progiter import ProgIter
 import numpy as np
 
@@ -13,11 +12,6 @@ class Executor:
         self.network = convolutional_neural_network.convolutional_neural_network()
         self.entropy_loss = nn.CrossEntropyLoss()
         self.gd_reducer = optim.SGD(self.network.parameters(), lr=0.01, momentum=0.9)
-
-    def load_dataset(self):
-        # set the dataset part of preprocessing
-        # self.train_data = None
-        pass
 
     # To avoid the overflow for a given number;
     # by normalising it with some probability value
@@ -72,5 +66,3 @@ class Executor:
             calc_min_loss = min(avg_loss, calc_min_loss)
             print("current iter loss:", calc_min_loss)
         return all_loss_vals, each_iter_loss, all_accuracy_vals
-
-# if __name__ == '__main__':
