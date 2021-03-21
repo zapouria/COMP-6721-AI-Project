@@ -15,9 +15,9 @@ def load_data(path):
     return ImageFolder(root = path,transform = torchvision.transforms.Compose([reshape_size, data_type, normalized_metrics]))
 
 def split_data(dataset):
-    # The training data is 80% of the full data set and the testing data is 20% of the original data.
+    # The training data is 75% of the full data set and the testing data is 25% of the original data.
     train_d, test_d = train_test_split(dataset,
-                                       test_size=0.2, 
+                                       test_size=0.25, 
                                        random_state=30
                                       )
     return train_d, test_d
@@ -26,7 +26,7 @@ def train_dataloarder(dataset):
     return DataLoader(dataset=dataset, 
                       num_workers=2, 
                       shuffle=True,
-                      batch_size=10
+                      batch_size=4
                      )
 
 
@@ -34,7 +34,7 @@ def test_dataloarder(dataset):
     return DataLoader(dataset=dataset,
                       num_workers=2, 
                       shuffle=True,
-                      batch_size=10
+                      batch_size=500
                      )
 
 

@@ -62,7 +62,7 @@ class Executor:
             each_iter_loss.append(avg_loss)
             calc_accuracy = self.calculate_model_accuracy(data_src)
             all_accuracy_vals.append(calc_accuracy)
-            print("current iter acc:", calc_accuracy)
+            print("current iter acc: %.4f"% calc_accuracy)
             calc_min_loss = min(avg_loss, calc_min_loss)
-            print("current iter loss:", calc_min_loss)
+            print("current iter loss: %.4f"% (calc_min_loss*100))
         return all_loss_vals, each_iter_loss, all_accuracy_vals
