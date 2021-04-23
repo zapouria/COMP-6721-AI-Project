@@ -39,8 +39,9 @@ class Executor:
 
         acc_in_percent = (accuracy / all_results) * 100
         return acc_in_percent
+    
 
-    def training_model_executor(self, data_src, num_iters):
+    def training_model_executor(self, data_src, num_iters, test_data_src=None,):
         all_loss_vals = []
         each_iter_loss = []
         calc_min_loss = float("inf")
@@ -60,7 +61,10 @@ class Executor:
             covered_so_far = len(all_loss_vals)
             avg_loss = total_iter_loss / covered_so_far
             each_iter_loss.append(avg_loss)
-            calc_accuracy = self.calculate_model_accuracy(data_src)
+            if test_data_src != None:
+                calc_accuracy = self.calculate_model_accuracy(test_data_src)
+            else:
+                calc_accuracy = self.calculate_model_accuracy(data_src)
             all_accuracy_vals.append(calc_accuracy)
             print("current iter acc: %.4f"% calc_accuracy)
             calc_min_loss = min(avg_loss, calc_min_loss)
